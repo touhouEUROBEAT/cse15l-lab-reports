@@ -25,6 +25,8 @@ In this step, we will be installing VS Code.
 VS Code is an awesome editor made by Microsoft. It offer great cross-platform support, and is highly customizable through is built-in extension marketplace. It is simple,
 versitile, and gets the job done. To download VS Code, follow the link here: [Link](https://code.visualstudio.com/download).
 
+![Image](./img/VSCode.png)
+
 My fellow OpenSUSE users may also opt to use Microsoft's repo and let our package manager do the work for us, by using the following codes:
 
 ```
@@ -71,6 +73,8 @@ server that you frequent, be careful! Eve may be listening.
 Enter yes and press enter, and the terminal will proceed to ask for your password. Enter your password and press enter again. Don't be surprised if your terminal does not
 show anything as you type in your password. It's just a safety feature.
 
+![Image](./img/SSHWelcome.png)
+
 If things go smoothly, welcome message will be displayed. If so, congradulations! You have just connected to a computer in the CSE basement. If not, double check if you
 connected to the correct server, your password is correct, and you have waited about 15 minutes after activating your course account. You have double checked all of these, 
 and the connection still doesn't go through, feel free to let your TA know, and s/he will help you out.
@@ -102,7 +106,7 @@ mannual for more detailed instruction. However, sometimes you just want some sup
 little program called tldr (not installed on remote server as of today, but you are free to install it on your own computer). It does exactly what its name suggest:
 a too long don't read summary of what a command does!
 
-(insert picture of tldr here)
+![Image](./img/tldr_eg.png)
 
 Bonus: Do you want to know which distro our remote server is running on? Run the following command:
 ```
@@ -146,7 +150,7 @@ The terminal may prompt you to provide password. Provide as required when prompt
 Now ssh into your remote account, and try `ls`, and you should find `WhereAmI.java` to be there. Now you can edit, compile or do whatever you wish with this file on your
 remote computer.
 
-(insert picture of scp in progress here)
+![Image](./img/scp_eg.png)
 
 # SSH Keys
 
@@ -167,7 +171,7 @@ ssh-keygen
 
 If you have not ever done this before, it will likely 
 
-(insert picture of ssh-keygen)
+![Image](./img/SSHKeygen.png)
 
 When it prompts you to enter the file in which the key will be saved, just hit enter and store it in the default location. Then, it will ask you for a passphrase. Notice
 that this is for encrypting your private key locally, and has nothing to do with your key for connecting with your remote server so although it is a good practice to
@@ -204,3 +208,5 @@ A few tips:
   `cp WhereAmI.java OtherMain.java; javac OtherMain.java; java WhereAmI'
 * You can use the up-arrow to go through the commands you have called before
 * ~~You always have the option to just put everything in a script, and just run the script.~~
+
+![Image](./img/remote-ls.png)
