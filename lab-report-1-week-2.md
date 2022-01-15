@@ -191,4 +191,16 @@ Now, you should be able to ssh/scp into your remote server without needing to en
 
 ---
 
-#Making Remote Running Even More Pleasant
+# Making Remote Running Even More Pleasant
+
+In this step, challenge yourself to make most pleasant process you can for making a local edit to WhereAmI.java, then copying it to the remote server and running it, using
+what you have learned so far.
+
+A few tips:
+
+* You can append a command in quotes at the end of ssh to directly run it on the remote server, print out the output on local machine, then exit. e.g.
+  `ssh (youraccounts)@ieng6.ucsd.edu "ls"`
+* You may join multiple commands on the same line by seperating them using semi-colons. e.g.
+  `cp WhereAmI.java OtherMain.java; javac OtherMain.java; java WhereAmI'
+* You can use the up-arrow to go through the commands you have called before
+* ~~You always have the option to just put everything in a script, and just run the script.~~
