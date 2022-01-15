@@ -75,4 +75,120 @@ If things go smoothly, welcome message will be displayed. If so, congradulations
 connected to the correct server, your password is correct, and you have waited about 15 minutes after activating your course account. You have double checked all of these, 
 and the connection still doesn't go through, feel free to let your TA know, and s/he will help you out.
 
+---
 
+# Trying Some Commands
+
+In this step, we will be trying out some basic commands in our remote server. Here are some basic commands to get you started with getting around in a *nix environment.
+
+* Find out where you are: pwd
+* Find out the contents of the current directory: ls
+* Go to a certain directory: cd (path to that directory)
+* Copy a file to another location: cp (path to file/name of file) (path to target/new name for copied file)
+* Print out the content of a file: cat (path to file/name of file) 
+* To edit a file: vim (path to file/name of file)
+
+As you may have learned in CSE 8/11, we can pass in special arguments for command line programs to let them to special things.
+
+e.g., try the following commands, and see how their outputs are different than just entering `ls`?
+```
+ls -a
+ls -l
+ls -t
+```
+
+Typically, a command line program always has a `-h` or `-help` options to tell you about how it works. Alternatively, you may opt to try `man (command)` to access its
+mannual for more detailed instruction. However, sometimes you just want some super basic instructions on how to get it started. In that case: I recommend this nice
+little program called tldr (not installed on remote server as of today, but you are free to install it on your own computer). It does exactly what its name suggest:
+a too long don't read summary of what a command does!
+
+(insert picture of tldr here)
+
+Bonus: Do you want to know which distro our remote server is running on? Run the following command:
+```
+cat /etc/os-release 
+```
+
+---
+
+# Moving Files with `scp`
+
+In this step, we will be moving files from our local machine to our remote server, using `scp`.
+
+SCP stands for Secure Copy Protocol, and as you may have guessed, it's function is to copy files (relatively) securely. The way scp command works is more or less
+similar to cp command. It follows the pattern of:
+
+```
+scp source destination 
+```
+
+Let's try an example. Create the following file on your local computer, and name it `WhereAmI.java`.
+
+```
+class WhereAmI {
+  public static void main(String[] args) {
+    System.out.println(System.getProperty("os.name"));
+    System.out.println(System.getProperty("user.name"));
+    System.out.println(System.getProperty("user.home"));
+    System.out.println(System.getProperty("user.dir"));
+  }
+}
+```
+
+Now, on your terminal on your local computer, cd to the location of `WhereAmI.java`, and run the following:
+
+```
+scp WhereAmI.java (youraccount)@ieng6.ucsd.edu:~/
+```
+
+The terminal may prompt you to provide password. Provide as required when prompted.
+
+Now ssh into your remote account, and try `ls`, and you should find `WhereAmI.java` to be there. Now you can edit, compile or do whatever you wish with this file on your
+remote computer.
+
+(insert picture of scp in progress here)
+
+# SSH Keys
+
+In this step, we will be setting up your ssh key to make the ssh/scp process more streamlined.
+
+Notice how you have to prove your identity through entering password everytime you ssh/scp into your remote account, even though you have been doing it in a row for
+five, six times in a row already? Doesn't it get frustrating that the remote server couldn't seem to remember your identity and just let you in?
+
+Well, frustrate no more, because we will be eliminating the need for this in this step, by providing our remote server with a unique, hard-to-fake token that represents 
+our identity. Think of it as us providing our finger print to the server. This way, whenever we ssh/scp, the server would just need a quick scan of our finger to make
+sure we are the intended party. 
+
+On your local machine, run the following command:
+
+```
+ssh-keygen
+```
+
+If you have not ever done this before, it will likely 
+
+(insert picture of ssh-keygen)
+
+When it prompts you to enter the file in which the key will be saved, just hit enter and store it in the default location. Then, it will ask you for a passphrase. Notice
+that this is for encrypting your private key locally, and has nothing to do with your key for connecting with your remote server so although it is a good practice to
+encrypt your local private key, feel free to simply leave blank and hit enter.
+
+Now, ssh into your remote account, and create a directory called .ssh:
+
+```
+ssh (youraccount)@ieng6.ucsd.edu
+mkdir .ssh
+exit
+```
+
+Then, on your local account, look for a hidden folder called `.ssh`. `cd` into that folder, and do the following:
+
+```
+$ scp id_rsa.pub (youraccount)@ieng6.ucsd.edu:~/.ssh/authorized_keys
+```
+
+Now, you should be able to ssh/scp into your remote server without needing to enter password at all!
+
+---
+
+#Making Remote Running Even More Pleasant
