@@ -209,4 +209,4 @@ A few tips:
 * You can use the up-arrow to go through the commands you have called before
 * ~~You always have the option to just put everything in a script, and just run the script.~~
 
-![Image](./img/remote-ls.png)
+![Image](./img/remote_ls.png)
