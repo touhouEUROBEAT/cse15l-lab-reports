@@ -79,6 +79,8 @@ If things go smoothly, welcome message will be displayed. If so, congradulations
 connected to the correct server, your password is correct, and you have waited about 15 minutes after activating your course account. You have double checked all of these, 
 and the connection still doesn't go through, feel free to let your TA know, and s/he will help you out.
 
+When you are ready to go back to your local machine, use `exit` command to terminate connection.
+
 ---
 
 # Trying Some Commands
