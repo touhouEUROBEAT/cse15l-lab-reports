@@ -9,7 +9,6 @@ confusing. But before we start, I would like to bring to your attention that:
 
 Below are the topics that we will be covering today:
 
-
 * Installing VS Code 
 * Remotely Connecting
 * Trying Some Commands
@@ -17,6 +16,7 @@ Below are the topics that we will be covering today:
 * Setting an SSH Key
 * Optimizing Remote Running
 
+---
 
 # Installing VS Code
 
