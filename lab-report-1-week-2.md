@@ -199,8 +199,9 @@ Now, you should be able to ssh/scp into your remote server without needing to en
 
 # Making Remote Running Even More Pleasant
 
-In this step, challenge yourself to make most pleasant process you can for making a local edit to WhereAmI.java, then copying it to the remote server and running it, using
-what you have learned so far.
+In this step, challenge yourself to make most pleasant process you can for making a local edit to WhereAmI.java, then copying it to the remote server and running it, using what you have learned so far. 
+
+*Try to get the total time for a run after editing and saving to under 10 total keystrokes/mouse clicks, including all typing.*
 
 A few tips:
 
@@ -210,5 +211,13 @@ A few tips:
   `cp WhereAmI.java OtherMain.java; javac OtherMain.java; java WhereAmI'
 * You can use the up-arrow to go through the commands you have called before
 * ~~You always have the option to just put everything in a script, and just run the script.~~
+
+The following is one of examples.
+
+```
+scp some_file.java (youraccounts)@ieng6.ucsd.edu:~/; ssh (youraccounts)@ieng6.ucsd.edu "javac some_file.java; java some_file"
+```
+
+You need to type out all of the commands at first, but starting from the second time, it'd take only two key strokes (up arrow and enter).
 
 ![Image](./img/remote_ls.png)
