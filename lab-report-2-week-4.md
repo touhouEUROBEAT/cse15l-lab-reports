@@ -1,6 +1,5 @@
-### Change 1:
+## Change 1:
 
----
 #### Screenshot of the code change diff from Github:
 
 ---
@@ -24,17 +23,47 @@ In the failure-inducing input, the file did not end with ")". As a result, the c
 
 Bug is eliminated by letting program terminate prematurely if at least one of the []() is no present in the rest of the file.
 
+
+## Change 2:
+
+#### Screenshot of the code change diff from Github:
+
 ---
-### Change 2:
+#### Link to the test file for a failure-inducing input that prompted you to make that change: [Here](https://github.com/touhouEUROBEAT/markdown-parse/blob/main/test-file1.md)
 
-Show a screenshot of the code change diff from Github (a page like this)
-Link to the test file for a failure-inducing input that prompted you to make that change
-Show the symptom of that failure-inducing input by showing the output of running the file at the command line for the version where it was failing (this should also be in the commit message history)
-Write 2-3 sentences describing the relationship between the bug, the symptom, and the failure-inducing input.
+---
+#### Symptom: Does not distinguish normal use of []() and link. Terminal output below:
 
-Change 3:
+```
+spaike97@localhost:~/Documents/UCSDw22/CSE15L/lab3/markdown-parse> java *.java test-file2.md
+[shouldn't be here]
+```
 
-Show a screenshot of the code change diff from Github (a page like this)
-Link to the test file for a failure-inducing input that prompted you to make that change
-Show the symptom of that failure-inducing input by showing the output of running the file at the command line for the version where it was failing (this should also be in the commit message history)
-Write 2-3 sentences describing the relationship between the bug, the symptom, and the failure-inducing input.
+---
+#### The underlying bug is that the program only looked for the first ( after ], and did not check what was in between these two symbols. 
+
+Therefore, in the test-file2.md, although the two pairs of [] and () were clearly used for seperate purpose, the program still paired them together and considered it a link.
+
+The problem is solved by introducing a rule that for a link to be considered, ( must follow immediately after ]/
+
+
+---
+### Change 3:
+
+---
+#### Screenshot of the code change diff from Github:
+
+---
+#### Link to the test file for a failure-inducing input that prompted you to make that change: [Here](https://github.com/touhouEUROBEAT/markdown-parse/blob/main/test-file2.md)
+
+---
+#### Symptom: Does not distinguish normal use of []() and link. Terminal output below:
+
+```
+spaike97@localhost:~/Documents/UCSDw22/CSE15L/lab3/markdown-parse> java *.java test-file2.md
+[shouldn't be here]
+```
+
+---
+#### The underlying bug is that the program assumed that the file must end with ")", when it's not neccesarily the case.
+
