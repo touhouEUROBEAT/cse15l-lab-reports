@@ -1,6 +1,6 @@
 ## Change 1:
 
-#### Screenshot of the code change diff from Github:
+#### Screenshot of the code change diff from Github: ![](https://raw.githubusercontent.com/touhouEUROBEAT/markdown-parse/main/img/diff1.png)
 
 ---
 #### Link to the test file for a failure-inducing input that prompted you to make that change: [Here](https://github.com/touhouEUROBEAT/markdown-parse/blob/main/test-file1.md)
@@ -26,7 +26,7 @@ Bug is eliminated by letting program terminate prematurely if at least one of th
 
 ## Change 2:
 
-#### Screenshot of the code change diff from Github:
+#### Screenshot of the code change diff from Github: ![](https://raw.githubusercontent.com/touhouEUROBEAT/markdown-parse/main/img/diff2.png)
 
 ---
 #### Link to the test file for a failure-inducing input that prompted you to make that change: [Here](https://github.com/touhouEUROBEAT/markdown-parse/blob/main/test-file1.md)
@@ -50,7 +50,7 @@ The problem is solved by introducing a rule that for a link to be considered, ( 
 ### Change 3:
 
 ---
-#### Screenshot of the code change diff from Github:
+#### Screenshot of the code change diff from Github: ![](https://raw.githubusercontent.com/touhouEUROBEAT/markdown-parse/main/img/diff3.png)
 
 ---
 #### Link to the test file for a failure-inducing input that prompted you to make that change: [Here](https://github.com/touhouEUROBEAT/markdown-parse/blob/main/test-file3.md)
