@@ -1,35 +1,11 @@
-## Hello, world;
+## Link to lab reports 
 
-[Link](https://touhoueurobeat.github.io/cse15l-lab-reports/test.html)	
+[Lab Report 1](https://touhoueurobeat.github.io/cse15l-lab-reports/lab-report-1-week-2.html)	
 
+[Lab Report 2](https://touhoueurobeat.github.io/cse15l-lab-reports/lab-report-2-week-4.html)	
+
+[Lab Report 3](https://touhoueurobeat.github.io/cse15l-lab-reports/lab-report-3-week-6.html)	
 ---
 
-
-**hello**
-
-# title
-
-## small title
-
-### samller title
-
-$$
-P = NP
-$$
-
-
-** This file has also been edited offline. **
-
-blah blah blah
-
-
-blah blah blah
-
-** End of edit. **
-
-|||
-|-|-|
-|1|2|
-|3|4|
 
 

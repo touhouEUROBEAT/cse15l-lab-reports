@@ -8,11 +8,11 @@ with the excessive key strokes every time we log in?
 
 We don't have to. Using the best editor in the universe, I entered the following into a file named the config file for my ssh.
 
-'''
+```
 Host cs15l
     HostName ieng6.ucsd.edu
     User cs15lwi22aje (be sure to use your own username when you try it)
-'''
+```
 
 ## Step 2:
 
