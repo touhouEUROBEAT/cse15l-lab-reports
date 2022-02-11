@@ -1,12 +1,12 @@
 ## Step 1:
 
-#### Show your .ssh/config file, and how you edited it (with VScode, another program, etc) ![](/img/report3_1.png) 
+#### Show your .ssh/config file, and how you edited it (with ~~VScode, another program, etc~~ `vim`) ![](/img/report3_1.png) 
 
 Since there are a lot of classes/students sharing the ieng6 server, it's inevitable that everyone's user name would be rather wordy so that they
 make sense, and don't collide with each other. It's a neccesary evil from the server's persepective, but do we, the users really have to put up 
 with the excessive key strokes every time we log in?
 
-We don't have to. Using the best editor in the universe, I entered the following into a file named the config file for my ssh.
+We don't have to. Using the best editor in the universe, I entered the following into a file named `config`, located at `~/.ssh/config`.
 
 ```
 Host cs15l
@@ -18,7 +18,7 @@ Host cs15l
 
 #### Show the ssh command logging you into your account using just the alias you chose. ![](/img/report3_2.png)
 
-As we can see, we are able to log into our account by using the alias cs15l, instead of our full user name, there by saving tremendous amount of 
+As we can see, we are able to log into our account by using the alias `cs15l`, instead of our full user name, there by saving tremendous amount of 
 key strokes.
 
 ## Step 3:
