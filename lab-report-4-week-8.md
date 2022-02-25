@@ -91,3 +91,12 @@ Result from my code: ![](/img/report4_snip3_mine.png)
 Result from the code I reviewed: ![](/img/report4_snip3_reviewed.png)
 
 ## Answer to the three questions
+
+#### Snippet 1 and inline all related cases that use inline code with backticks
+Yes, I think we could keep track of all backticks, and check whether any `[]()` are part of backticks pairs before considering something a link.
+
+#### Snippet 2 and all related cases that nest parentheses, brackets
+Yes, maybe we could use a stack to keep track of all parentheses and brackets to ensure that all matching pairs in side `[]()` are out of way before we consider something a link.
+
+#### Snippet 3 and all related cases that have newlines in brackets and parentheses
+Not for my code, but for the code that my squad reviewed, I think we concluded during lab that their code will work for this case if they do a space trim between `()` before checking whether something is a link.
