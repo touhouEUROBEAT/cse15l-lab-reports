@@ -112,7 +112,7 @@ Below is the output.
 > test-files/578.md[/path/to/train.jpg  "title"   ]
 ```
 
-Plenty o difference as we can see. I'll take two test cases, `567.md` and `571.md`.
+Plenty o differences as we can see. I'll take a look at two test cases, `567.md` and `571.md`.
 
 ## 567.md: What went wrong and why?
 
@@ -142,7 +142,7 @@ Not just that, as we can see, dingus first gave us the link from the second `[fo
 
 After some tinkering, I'm convinced that this is indeed the case:
 
-If we change the content of test-file to
+If we change the content of test file to
 
 ```
 [foo1](not a link)
@@ -177,8 +177,6 @@ does not matter).
 
 If only `[something]: \url` presents, and there are no `[something](not a link)`, then `[something]: \url` gets ignored.
 
-If we have both `[something]: \url` and `[something](a valid link)`, both are treated as link normally.
-
 ### A fix:
 
 Since both are incorrect, I'll choose to take a look at our code. It's apparent we were not aware of this feature at all, as we did not implement anything to check this case at all. To fix this, I think the whole
@@ -197,7 +195,12 @@ not a valid link.
 So what we need to do is, first, after finding the first `[]` pair, we need to check if what follows is of the form `: \url`. If it is, we need to store that in a HashMap, with `[]` as key. We also need a method to check whether what's
 between `()` is a valid link. If not, we need to store that in the same HashMap with `[something]` as key.
 
-Whenever we see that the HashMap contains key `[something]`, instead of storing `: \url` or `(not a link)`, we should merge these two, add it to `toReturn`, and remove `[something]` from the HashMap.
+Whenever we see, e.g., `[something](not a valid link`, and that the HashMap contains key `[something]`, we check if HashMap.get(`[something]`) is of the form `: \url`. If it is, instead of storing `(not a link)`, we should merge these two,
+add it to `toReturn`, and remove `[something]` from the HashMap.
+
+Of course, this solution is rather naive and leaves room for issues. (How should the value be stored in HashMap? String for key and Queue for content? Would this be a bit too memory inefficient if we are dealing with very large document?)
+
+But I think this is the general direction I'd take if I'm to re-write our code.
 
 ## 571.md: What went wrong and why?
 
