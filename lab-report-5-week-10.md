@@ -130,6 +130,45 @@ and below is the preview from `https://spec.commonmark.org/dingus/`
 
 where foo points to `https://spec.commonmark.org/url1`
 
+This seems kind of weird, intuitively, the one from week 9 is correct in that there are no links, but dingus is telling us that there actually is one.
+
+Not just that, as we can see, dingus first gave us the link from the second `[foo]`, and printed out the message after the first `[foo]`, as if two `[foo]` got merged together.
+
+After some tinkering, I'm convinced that this is indeed the case:
+
+If we change the content of test-file to
+
+```
+[foo1](not a link)
+
+[foo]: /url1
+```
+
+the output becomes
+
+```
+[foo1](not a link)
+```
+
+and if we change the content to
+
+```
+[foo](not a link)
+
+[foo1]: /url1
+```
+
+then the output becomes
+
+```
+[foo](not a link)
+```
+
+So it seems that the statement `[something]: \url` works like standardized formating in `printf()` in C/C++, where:
+
+If you have both a `[something]: \url` and `[something](something else)`, it merges two `[something]`, uses `\url` as a link, and then prints out `(something else)` (order of two statements
+does not matter).
+
 ## 571.md: What went wrong and why?
 
 Below is the content of `567.md`
@@ -141,3 +180,16 @@ Below is the content of `567.md`
 and below is the preview from `https://spec.commonmark.org/dingus/`
 
 ![](/img/report5_2.png)
+
+As we can see, this is an image and should not be recognized as a link, so our implementation is wrong, and the one from week 9 is correct.
+
+Upon reviewing our code, I think the problem is here, starting at `line 38`:
+
+```
+            int nextOpenBracket = markdown.indexOf("[", currentIndex);
+            if (nextOpenBracket == -1) break;
+```
+
+We just assumed that if there's a "[", it'd be the start of a valid link. We should add in a `else if` statement below to check whether `nextOpenBracket == 0`, or `markdown.charAt(nextOpenBracket - 1) == '!'`.
+
+If either of the two happens, then this `[` is just the start of a image, not a link, and we should immediately `break`.
