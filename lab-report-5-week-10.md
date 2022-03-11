@@ -130,9 +130,15 @@ and below is the preview from `https://spec.commonmark.org/dingus/`
 
 where foo points to `https://spec.commonmark.org/url1`
 
+### Who is right?
+
+Both are incorrect.
+
 This seems kind of weird, intuitively, the one from week 9 is correct in that there are no links, but dingus is telling us that there actually is one.
 
 Not just that, as we can see, dingus first gave us the link from the second `[foo]`, and printed out the message after the first `[foo]`, as if two `[foo]` got merged together.
+
+### Why is that.
 
 After some tinkering, I'm convinced that this is indeed the case:
 
@@ -166,8 +172,32 @@ then the output becomes
 
 So it seems that the statement `[something]: \url` works like standardized formating in `printf()` in C/C++, where:
 
-If you have both a `[something]: \url` and `[something](something else)`, it merges two `[something]`, uses `\url` as a link, and then prints out `(something else)` (order of two statements
+If you have both a `[something]: \url` and `[something](not a link)`, it merges two `[something]`, uses `\url` as a link with tag `something`, and then prints out `(not a link)` (order of two statements
 does not matter).
+
+If only `[something]: \url` presents, and there are no `[something](not a link)`, then `[something]: \url` gets ignored.
+
+If we have both `[something]: \url` and `[something](a valid link)`, both are treated as link normally.
+
+### A fix:
+
+Since both are incorrect, I'll choose to take a look at our code. It's apparent we were not aware of this feature at all, as we did not implement anything to check this case at all. To fix this, I think the whole
+code needs to be re-written, but since lab report requires me to show where specifically it is wrong, and it's impractical to include the entire code here, below is the core of the problem, starting at `line 59`:
+
+```
+
+            if (openParen-nextCloseBracket == 1) {
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+            }
+```
+
+There are two things wrong here. First, we didn't check what's inside the `()` to see if it's a valid link, and two, we didn't check if there's a `[something]: \url` that we could merge with if what's inside the `()` is
+not a valid link.
+
+So what we need to do is, first, after finding the first `[]` pair, we need to check if what follows is of the form `: \url`. If it is, we need to store that in a HashMap, with `[]` as key. We also need a method to check whether what's
+between `()` is a valid link. If not, we need to store that in the same HashMap with `[something]` as key.
+
+Whenever we see that the HashMap contains key `[something]`, instead of storing `: \url` or `(not a link)`, we should merge these two, add it to `toReturn`, and remove `[something]` from the HashMap.
 
 ## 571.md: What went wrong and why?
 
@@ -181,7 +211,11 @@ and below is the preview from `https://spec.commonmark.org/dingus/`
 
 ![](/img/report5_2.png)
 
+### Who is right?
+
 As we can see, this is an image and should not be recognized as a link, so our implementation is wrong, and the one from week 9 is correct.
+
+### Why is that.
 
 Upon reviewing our code, I think the problem is here, starting at `line 38`:
 
@@ -190,6 +224,10 @@ Upon reviewing our code, I think the problem is here, starting at `line 38`:
             if (nextOpenBracket == -1) break;
 ```
 
-We just assumed that if there's a "[", it'd be the start of a valid link. We should add in a `else if` statement below to check whether `nextOpenBracket == 0`, or `markdown.charAt(nextOpenBracket - 1) == '!'`.
+We just assumed that if there's a "[", it'd be the start of a valid link.
+
+### A fix:
+
+We should add in a `else if` statement below to check whether `nextOpenBracket == 0`, or `markdown.charAt(nextOpenBracket - 1) == '!'`.
 
 If either of the two happens, then this `[` is just the start of a image, not a link, and we should immediately `break`.
