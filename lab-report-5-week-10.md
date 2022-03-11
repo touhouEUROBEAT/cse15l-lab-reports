@@ -30,7 +30,7 @@ Then:
 
 Below is the output.
 
-``
+```
 104c104
 < test-files/194.md[url]
 ---
@@ -110,19 +110,19 @@ Below is the output.
 < test-files/578.md[]
 ---
 > test-files/578.md[/path/to/train.jpg  "title"   ]
-``
+```
 
 Plenty o difference as we can see. I'll take two test cases, `567.md` and `571.md`.
 
-## 567.md What went wrong and why?
+## 567.md: What went wrong and why?
 
 Below is the content of `567.md`
 
-``
+```
 [foo](not a link)
 
 [foo]: /url1
-``
+```
 
 and below is the preview from `https://spec.commonmark.org/dingus/`
 
@@ -130,13 +130,13 @@ and below is the preview from `https://spec.commonmark.org/dingus/`
 
 where foo points to `https://spec.commonmark.org/url1`
 
-## 571.md
+## 571.md: What went wrong and why?
 
 Below is the content of `567.md`
 
-``
+```
 ![foo](/url "title")
-``
+```
 
 and below is the preview from `https://spec.commonmark.org/dingus/`
 
